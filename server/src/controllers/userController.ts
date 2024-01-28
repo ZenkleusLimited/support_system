@@ -3,6 +3,7 @@ import AffiliateModel from "../models/AffiliateModel";
 import bcrypt from "bcrypt";
 import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
+import { sendMail } from "../services/email";
 
 interface tokenDecode {
   email: string;
@@ -79,7 +80,7 @@ export const userLogin: RequestHandler = async (req, res) => {
     const { email, name } = foundUser;
     res
       .status(201)
-      .json({ accessToken, user: { email, role: foundUser.role, name } });
+      .json({ token:accessToken, email, role: foundUser.role, name, id:foundUser._id });
   } else {
     res.sendStatus(401);
   }
@@ -104,25 +105,26 @@ export const registerUser:RequestHandler = async (req, res) => {
     const hashedPwd = await bcrypt.hash(password, 10);
 
     //create and store the new user
-    await UsersModel.create({
+    const user = await UsersModel.create({
       email,
       password: hashedPwd,
       name,
       role
     });
 
-    if (role === "affiliate") {
+    if (role === "Affiliate") {
       const { phone, schoolsReferred } = req.body
       await AffiliateModel.create({
-        email, name, phone, schoolsReferred
+        email, name, phone, schoolsReferred, userId:user._id
       });
+      await sendMail({email, name, password})
     }
 
     console.log(`New ${role}: ${name} ${email} created!`);
-    res.status(201).json({ success: `New ${role} ${name} ${email} created!` });
+    return res.status(201).json({ success: `New ${role} ${name} ${email} created!` });
   } catch (err: unknown) {
     const message = err instanceof Error? err.message : `${err}`
-    res.status(500).json({ message });
+    return res.status(500).json({ message });
   }
 };
 

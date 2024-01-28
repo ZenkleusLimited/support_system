@@ -1,5 +1,8 @@
 import { Tasks, Users, Dashboard, Schools, AddUser, UsersLayout, AddSchool } from "../pages";
+import View from "../components/adminComponents/View";
 import { RouteType } from "./config";
+import SchoolView from "../components/adminComponents/SchoolView";
+import UserView from "../components/adminComponents/UserView";
 
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
@@ -7,7 +10,7 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
-const appRoutes: RouteType[] = [
+const adminRoutes: RouteType[] = [
   {
     path: "dashboard",
     element: <Dashboard />,
@@ -81,6 +84,30 @@ const appRoutes: RouteType[] = [
       icon: <AssignmentTurnedInOutlinedIcon />
     }
   },
+  {
+    path: "view/:type/:id",
+    element: <View />,
+    state: "view",
+    sidebarProps: {
+      displayText: ""
+    }
+  },
+  {
+    path: "userview/:id",
+    element: <UserView />,
+    state: "userview",
+    sidebarProps: {
+      displayText: ""
+    }
+  },
+  {
+    path: "schoolview/:id",
+    element: <SchoolView />,
+    state: "schoolview",
+    sidebarProps: {
+      displayText: ""
+    }
+  }
 ]
 
-export default appRoutes
+export default adminRoutes

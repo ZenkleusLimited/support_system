@@ -1,4 +1,4 @@
-export type user = { name: string, email: string, token: 'string', role: string }
+export type user = { name: string, email: string, token: 'string', role: string, id:string }
 export type luser = { email: string, password: string };
 export type afiliate = {
   email: string;
@@ -20,7 +20,10 @@ export type school = {
   trainDate: Date;
   address: string;
   package: number;
+  currentTerm: string;
   payment: boolean[];
+  affiliatePercentage: number;
+  _id?: string;
 }
 
 export type schoolUpdate = {
@@ -32,9 +35,34 @@ export type schoolUpdate = {
   trainDate?: Date;
   address?: string;
   package?: number;
-  payment?: boolean[]
+  currentTerm?: string;
+  payment?: boolean[];
+  affiliatePercentage?: number;
 }
 
 export type lschool = {
   message: string
+}
+
+export type visits = {
+  userId: string;
+  schoolName: string;
+  address: string;
+  comment: string;
+}
+
+
+
+export type affilaiteSchool = {
+  id: string,
+  schoolData: school
+}
+
+export type notification = {
+  recieverId: string;
+  senderId: string;
+  url: string;
+  type: string;
+  status: string;
+  senderName: string;
 }

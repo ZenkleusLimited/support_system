@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import { Route } from "react-router-dom";
 import PageWrapper from "../components/layout/PageWrapper";
-import appRoutes from "./appRoutes";
+import adminRoutes from "./adminRoutes";
+import affiliateRoutes from "./affiliateRoutes";
 import { RouteType } from "./config";
 
 
@@ -34,4 +35,5 @@ const generateRoute = (routes: RouteType[]): ReactNode => {
   ));
 };
 
-export const routes: ReactNode = generateRoute(appRoutes);
+export const routes: ReactNode = generateRoute(adminRoutes);
+export const afroutes: ReactNode = generateRoute(affiliateRoutes);
