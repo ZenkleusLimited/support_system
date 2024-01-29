@@ -5,7 +5,9 @@ export type afiliate = {
   name: string;
   phone: string;
   role?: string;
-  schoolsReferred: string[]
+  address?: string;
+  schoolsReferred: {schoolId:string, percentage:number}[];
+  _id?: string;
 }
 export type lafiliate = {
   id?: string | false;
@@ -14,16 +16,18 @@ export type school = {
   email: string;
   name: string;
   students: number;
-  onboarded: boolean;
-  trained: boolean;
-  onboardDate: Date;
-  trainDate: Date;
+  onboarded?: boolean;
+  trained?: boolean;
+  onboardDate?: Date;
+  trainDate?: Date;
   address: string;
-  package: number;
+  package?: number;
   currentTerm: string;
-  payment: boolean[];
-  affiliatePercentage: number;
+  payment?: boolean[];
+  affiliatePercentage?: number;
   _id?: string;
+  id?: string;
+  totalPayable?: string;
 }
 
 export type schoolUpdate = {
@@ -49,9 +53,9 @@ export type visits = {
   schoolName: string;
   address: string;
   comment: string;
+  _id?: string;
+  createdAt?: Date
 }
-
-
 
 export type affilaiteSchool = {
   id: string,
@@ -65,4 +69,16 @@ export type notification = {
   type: string;
   status: string;
   senderName: string;
+}
+
+export type message = {
+  recieverId: string;
+  senderId: string;
+  senderName: string;
+  createdAt: Date;
+  updatedAt: Date;
+  content: string;
+  title: string;
+  read: boolean;
+  _id?:string
 }
